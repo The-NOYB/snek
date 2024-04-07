@@ -15,19 +15,24 @@ class Square(pygame.sprite.Sprite):
         self.pos = []
 
     def update(self):
+        dx,dy = 0,0
         if self.dir == "right":
-            self.x += 1.25 * common.ratio * common.dt
-            self.y += 0.665 * common.ratio * common.dt 
+            dx += 1.25 * common.ratio * common.dt
+            dy += 0.665 * common.ratio * common.dt 
         elif self.dir == "up":
-            self.x += 1.25 * common.ratio * common.dt
-            self.y -= 0.665 * common.ratio * common.dt
+            dx += 1.25 * common.ratio * common.dt
+            dy -= 0.665 * common.ratio * common.dt
         elif self.dir == "left":
-            self.x -= 1.25 * common.ratio * common.dt
-            self.y -= 0.665 * common.ratio * common.dt
+            dx -= 1.25 * common.ratio * common.dt
+            dy -= 0.665 * common.ratio * common.dt
         elif self.dir == "down":
-            self.x -= 1.25 * common.ratio * common.dt
-            self.y += 0.665 * common.ratio * common.dt
+            dx -= 1.25 * common.ratio * common.dt
+            dy += 0.665 * common.ratio * common.dt
+
+        self.x += dx
+        self.y += dy
         self.rect.centerx,self.rect.centery = self.x,self.y
+        return dx,dy
 
 class Snake():
     def __init__(self):

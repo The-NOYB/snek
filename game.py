@@ -1,14 +1,21 @@
 import pygame,sys,time
 import common
+from mapc import Map
 from sprites.snake import Snake,Square
 
+world = Map()
+snb = pygame.sprite.Group()
+player = Snake()
+snb.add(player.head)
+snb.add(player.tail)
+
 class Game():
-    def __init__(self,player,snb):
+    def __init__(self):
         self.state = "gmloop"
-        self.player = player
-        self.snb = snb
+        print(world.con_alp())
 
     def gmloop(self):
+        world.mapblit(common.valx,common.valy)
 
         for event in pygame.event.get(): # for loop for events
             if event.type == pygame.QUIT: # quitting 
@@ -23,29 +30,29 @@ class Game():
                     common.valx = common.displayunit[common.screen]//2
     
                 if event.key == pygame.K_RETURN:
-                    self.player.add()
-                    self.snb.add(self.player.bod[-1])
+                    player.add()
+                    snb.add(player.bod[-1])
     
-                if event.key == pygame.K_RIGHT and (self.player.head.dir=="up" or self.player.head.dir == "down") and common.time1 - self.player.timer > 0.5:
-                    self.player.timer = common.time1
-                    self.player.head.pos = ([self.player.head.x,self.player.head.y,"right"])
-                    self.player.head.dir = "right"
-                elif event.key == pygame.K_LEFT and (self.player.head.dir=="up" or self.player.head.dir == "down")and common.time1 - self.player.timer > 0.5:
-                    self.player.timer = common.time1
-                    self.player.head.pos = ([self.player.head.x,self.player.head.y,"left"])
-                    self.player.head.dir = "left"
-                elif event.key == pygame.K_UP and (self.player.head.dir=="left" or self.player.head.dir == "right")and common.time1 - self.player.timer > 0.5:
-                    self.player.timer = common.time1
-                    self.player.head.pos = ([self.player.head.x,self.player.head.y,"up"])
-                    self.player.head.dir = "up"
-                elif event.key == pygame.K_DOWN and (self.player.head.dir=="left" or self.player.head.dir == "right")and common.time1 - self.player.timer > 0.5:
-                    self.player.timer = common.time1
-                    self.player.head.pos = ([self.player.head.x,self.player.head.y,"down"])
-                    self.player.head.dir = "down"
+                if event.key == pygame.K_RIGHT and (player.head.dir=="up" or player.head.dir == "down") and common.time1 - player.timer > 0.5:
+                    player.timer = common.time1
+                    player.head.pos = ([player.head.x,player.head.y,"right"])
+                    player.head.dir = "right"
+                elif event.key == pygame.K_LEFT and (player.head.dir=="up" or player.head.dir == "down")and common.time1 - player.timer > 0.5:
+                    player.timer = common.time1
+                    player.head.pos = ([player.head.x,player.head.y,"left"])
+                    player.head.dir = "left"
+                elif event.key == pygame.K_UP and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
+                    player.timer = common.time1
+                    player.head.pos = ([player.head.x,player.head.y,"up"])
+                    player.head.dir = "up"
+                elif event.key == pygame.K_DOWN and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
+                    player.timer = common.time1
+                    player.head.pos = ([player.head.x,player.head.y,"down"])
+                    player.head.dir = "down"
 
-        self.player.changedir(self.player.newd)
-        self.snb.update()
-        self.snb.draw(common.vwin)
+        player.changedir(player.newd)
+        snb.update()
+        snb.draw(common.vwin)
 
     def menu(self):
         pass
