@@ -4,18 +4,19 @@ from mapc import Map
 from sprites.snake import Snake,Square
 
 world = Map()
-snb = pygame.sprite.Group()
+snakebod = pygame.sprite.Group()
 player = Snake()
-snb.add(player.head)
-snb.add(player.tail)
+snakebod.add(player.head)
+snakebod.add(player.tail)
 
 class Game():
     def __init__(self):
         self.state = "gmloop"
-        print(world.con_alp())
+        world.con_alp()
 
     def gmloop(self):
-        world.mapblit(common.valx,common.valy)
+        dx,dy = player.head.dpos
+        world.mapblit(common.valx,common.valy,dx,dy)
 
         for event in pygame.event.get(): # for loop for events
             if event.type == pygame.QUIT: # quitting 
@@ -31,28 +32,25 @@ class Game():
     
                 if event.key == pygame.K_RETURN:
                     player.add()
-                    snb.add(player.bod[-1])
+                    snakebod.add(player.bod[-1])
     
                 if event.key == pygame.K_RIGHT and (player.head.dir=="up" or player.head.dir == "down") and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
-                    player.head.pos = ([player.head.x,player.head.y,"right"])
                     player.head.dir = "right"
                 elif event.key == pygame.K_LEFT and (player.head.dir=="up" or player.head.dir == "down")and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
-                    player.head.pos = ([player.head.x,player.head.y,"left"])
                     player.head.dir = "left"
                 elif event.key == pygame.K_UP and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
-                    player.head.pos = ([player.head.x,player.head.y,"up"])
                     player.head.dir = "up"
                 elif event.key == pygame.K_DOWN and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
-                    player.head.pos = ([player.head.x,player.head.y,"down"])
                     player.head.dir = "down"
 
         player.changedir(player.newd)
-        snb.update()
-        snb.draw(common.vwin)
+        player.updaterel()
+        snakebod.update()
+        snakebod.draw(common.vwin)
 
     def menu(self):
         pass

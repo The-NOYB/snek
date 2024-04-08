@@ -25,7 +25,7 @@ class Map():
         for y,row in enumerate(self.world):
             for x, col in enumerate(row):
                 if col == "1":
-                    common.vwin.blit(self.blkls[common.screen],(midx+valx*(x-1)-y*valx,midy-(len(self.world)-y)*valy+x*valy))
+                    common.vwin.blit(self.blkls[common.screen],(midx+valx*(x-1)-y*valx+dx,midy-(len(self.world)-y)*valy+x*valy+dy))
    
     def C(self):
         pass
