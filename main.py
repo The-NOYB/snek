@@ -4,7 +4,7 @@ from game import Game
 
 pygame.init()
 fontt = pygame.font.Font(None,size=48)
-window = pygame.display.set_mode(common.displaysize[common.screen])
+window = pygame.display.set_mode(common.displaysize)
 pygame.display.set_caption("The Snexplorer")
 clock = pygame.time.Clock()
 

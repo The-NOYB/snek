@@ -24,12 +24,6 @@ class Game():
                 sys.exit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F4: # for resizing window
-                    common.punit = common.displayunit[common.screen] 
-                    common.vwin,common.screen,common.ratio = common.changewin(window,common.vwin,common.screen,common.ratio)
-                    common.valy = round(38/72*common.displayunit[common.screen]/2)
-                    common.valx = common.displayunit[common.screen]//2
-    
                 if event.key == pygame.K_RETURN:
                     player.add()
                     snakebod.add(player.bod[-1])

@@ -43,7 +43,7 @@ class Snake():
     def __init__(self):
         self.leng = 2
         self.newd = None
-        self.head = Square(common.displaymid[common.screen][0]+1,common.displaymid[common.screen][1]-common.valy+1,head=True)
+        self.head = Square(common.displaymid[0]+1,common.displaymid[1]-common.valy+1,head=True)
         self.tail = Square(self.head.rect.centerx-common.valx,self.head.rect.centery+common.valy)
         self.bod = [self.head]
         self.timer = pygame.time.get_ticks()
