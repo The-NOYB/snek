@@ -28,6 +28,3 @@ class Map():
             for x, col in enumerate(row):
                 if col == "1":
                     common.vwin.blit(self.block, (midx+valx*(x-1)-y*valx+dx, midy-(len(self.world)-y)*valy+x*valy+dy))
-   
-    def C(self):
-        pass
