@@ -9,9 +9,9 @@ class Square(pygame.sprite.Sprite):
         self.ishead = head
         self.next = nxt
         self.prev = prv
-        self.rect = pygame.FRect(0,0,17*common.ratio,17*common.ratio)
+        self.rect = pygame.FRect(0,0,19*common.ratio,19*common.ratio)
         self.rect.center = (self.x,self.y)
-        self.image = pygame.Surface((17*common.ratio,17*common.ratio))
+        self.image = pygame.Surface((19*common.ratio,19*common.ratio))
         self.image.fill([random.randint(1,255) for i in range(3)])
         self.dir = di 
         if self.ishead:
@@ -24,28 +24,30 @@ class Square(pygame.sprite.Sprite):
         v3 = pygame.math.Vector2(0, abs(self.prev.y - common.valy))
 
         # for some fucking reason this works :')
-        if ((self.dir in ["up","left"] and self.prev.dir in ["up","left"]) or (self.dir in ["down","right"] and self.prev.dir in ["down","right"])) and v1.dot(v3)/v1.magnitude()/v3.magnitude() < 0.45:
+        if ((self.dir in ["up","left"] and self.prev.dir in ["up","left"]) or (self.dir in ["down","right"] and self.prev.dir in ["down","right"])) and v1.dot(v3)/v1.magnitude()/v3.magnitude() < 0.48:
             return True
-        elif ((self.dir in ["up","right"] and self.prev.dir in ["up","right"]) or (self.dir in ["down","left"] and self.prev.dir in ["down","left"])) and v1.dot(v2)/v1.magnitude()/v2.magnitude() < 0.87:
+        elif ((self.dir in ["up","right"] and self.prev.dir in ["up","right"]) or (self.dir in ["down","left"] and self.prev.dir in ["down","left"])) and v1.dot(v2)/v1.magnitude()/v2.magnitude() < 0.85:
             return True
 
         return False
 
-    def update(self,hdx,hdy):
+    def update(self,hdx=0,hdy=0):
 
         dx,dy = 0,0
+        #1.25,0.665
+
         if self.dir == "right":
-            dx += 1.25 * common.ratio * common.dt
-            dy += 0.665 * common.ratio * common.dt 
+            dx += 1.54 * common.ratio * common.dt
+            dy += 0.914 * common.ratio * common.dt 
         elif self.dir == "up":
-            dx += 1.25 * common.ratio * common.dt
-            dy -= 0.665 * common.ratio * common.dt
+            dx += 1.54 * common.ratio * common.dt
+            dy -= 0.914 * common.ratio * common.dt
         elif self.dir == "left":
-            dx -= 1.25 * common.ratio * common.dt
-            dy -= 0.665 * common.ratio * common.dt
+            dx -= 1.54 * common.ratio * common.dt
+            dy -= 0.914 * common.ratio * common.dt
         elif self.dir == "down":
-            dx -= 1.25 * common.ratio * common.dt
-            dy += 0.665 * common.ratio * common.dt
+            dx -= 1.54 * common.ratio * common.dt
+            dy += 0.914 * common.ratio * common.dt
 
         if self.ishead:
             self.dpos[0] -= dx
@@ -67,7 +69,7 @@ class Snake():
         self.ismove = False
         self.head = Square(common.displaymid[0],common.displaymid[1]-common.valy,head=True)
         self.tail = Square(self.head.rect.centerx-common.valx,self.head.rect.centery+common.valy)
-        self.head.update(0,0)
+        self.head.update() # so that the distance is maintained
         self.tail.prev = self.head
         self.head.next = self.tail
         self.timer = pygame.time.get_ticks()

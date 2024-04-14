@@ -9,8 +9,8 @@ class Map():
             for i in rfile:
                 world.append(i)
         self.world = world
-        self.block = pygame.image.load("data/fornowcube.png")
-        self.block = pygame.transform.scale(self.block,(60,60))# [ pygame.transform.scale(self.block,(i*20,i*20)) for i in range(3,7)] # better cluster of blocks 120 x 90
+        self.block = pygame.image.load("data/dekhte hai.png")
+        self.block = pygame.transform.scale(self.block,(75,87))# [ pygame.transform.scale(self.block,(i*20,i*20)) for i in range(3,7)] # better cluster of blocks 120 x 90
 
     def con_alp(self):
 #        for various blocks

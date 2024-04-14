@@ -33,16 +33,16 @@ class Game():
                 elif event.key == pygame.K_SPACE and player.ismove:
                     player.ismove = False
 
-                if player.ismove and event.key == pygame.K_RIGHT and (player.head.dir=="up" or player.head.dir == "down") and common.time1 - player.timer > 0.5:
+                if player.ismove and event.key == pygame.K_d and (player.head.dir=="up" or player.head.dir == "down") and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
                     player.head.dir = "right"
-                elif player.ismove and event.key == pygame.K_LEFT and (player.head.dir=="up" or player.head.dir == "down")and common.time1 - player.timer > 0.5:
+                elif player.ismove and event.key == pygame.K_a and (player.head.dir=="up" or player.head.dir == "down")and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
                     player.head.dir = "left"
-                elif player.ismove and event.key == pygame.K_UP and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
+                elif player.ismove and event.key == pygame.K_w and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
                     player.head.dir = "up"
-                elif player.ismove and event.key == pygame.K_DOWN and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
+                elif player.ismove and event.key == pygame.K_s and (player.head.dir=="left" or player.head.dir == "right")and common.time1 - player.timer > 0.5:
                     player.timer = common.time1
                     player.head.dir = "down"
 
