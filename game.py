@@ -16,7 +16,7 @@ class Game():
 
     def gmloop(self):
         dx,dy = player.head.dpos
-        world.mapblit(common.valx,common.valy,dx,dy)
+        world.mapblit(common.valx,common.valy,dx,dy,player.head.ison[0],player.head.ison[1])
 
         for event in pygame.event.get(): # for loop for events
             if event.type == pygame.QUIT: # quitting 
