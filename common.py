@@ -9,7 +9,7 @@ displaymid =  [displaysize[0]//2,displaysize[1]//2]
 screen = 0
 vwin = pygame.Surface(displaysize)
 ratio = 1
-valx = 37 # 30
-valy = 21 # 16
+valx = 37
+valy = 21
 
 

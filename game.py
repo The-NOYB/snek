@@ -13,10 +13,19 @@ class Game():
     def __init__(self):
         self.state = "menu"
         world.con_alp()
+        player.head.ison = world.spawn
 
     def gmloop(self):
+
+        if common.time1 - world.timer > 3.99 and player.ismove:
+            print("\n",[player.head.dpos[0]/common.valx, player.head.dpos[1]/common.valy],"\n")
+            world.updworld( [round(x) for x in player.head.ison] )
+            world.timer = common.time1
+            player.head.dpos = [ x - round(x) for x in player.head.dpos ]
+
         dx,dy = player.head.dpos
-        world.mapblit(common.valx,common.valy,dx,dy,player.head.ison[0],player.head.ison[1])
+        world.mapblit(common.valx,common.valy,dx,dy)
+#        pygame.draw.line(common.vwin,[0,0,0],common.displaymid,[common.displaymid[x] - common.dpos[x] for x in range(2)])
 
         for event in pygame.event.get(): # for loop for events
             if event.type == pygame.QUIT: # quitting 
@@ -48,6 +57,7 @@ class Game():
 
         if player.ismove:
             snakebod.update(player.head.dmov[0],player.head.dmov[1])
+        
         snakebod.draw(common.vwin)
 
     def menu(self):
