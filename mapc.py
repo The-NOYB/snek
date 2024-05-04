@@ -11,10 +11,11 @@ class Map():
 
         self.wholeworld = world
         self.spawn = spawn
+        self.shift = [0,0]
         self.timer = common.time1
         self.world = self.getworld(self.spawn)
         self.leng = 59 
-        self.block = pygame.image.load("data/dekhte hai.png")
+        self.block = pygame.image.load("data/dekhte hai2.png")
         self.ice_block = pygame.image.load("data/cringe ice.png")
         self.rock_block = pygame.image.load("data/cringe rock.png")
 
@@ -39,15 +40,16 @@ class Map():
         return warr
 
     def updworld(self,ison):
-        warr = self.getworld(ison)
+        warr= self.getworld(ison)
         self.world = warr
-        return self.world == warr
                     
     def mapblit(self,valx,valy,dx=0,dy=0):   # work on this and inf
 #        valx *= 2
 #        valy *= 2
 #        valy -= 1
 
+        dx += self.shift[0]*common.valx
+        dy += self.shift[1]*common.valy
         midx = common.displaymid[0]
         midy = common.displaymid[1]
 

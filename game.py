@@ -13,15 +13,20 @@ class Game():
     def __init__(self):
         self.state = "menu"
         world.con_alp()
-        player.head.ison = world.spawn
+        player.head.ison = [x - .5 for x in world.spawn]
+        self.someval = player.head.ison
 
     def gmloop(self):
 
-        if common.time1 - world.timer > 3.99 and player.ismove:
-            print("\n",[player.head.dpos[0]/common.valx, player.head.dpos[1]/common.valy],"\n")
+
+        self.someval = player.head.ison
+        if player.ismove and abs(player.head.dpos[0]) > common.valx*5 and abs(player.head.dpos[1]) > common.valy*5:
+            print([(x,round(x)) for x in player.head.ison],player.head.dpos)
             world.updworld( [round(x) for x in player.head.ison] )
-            world.timer = common.time1
-            player.head.dpos = [ x - round(x) for x in player.head.dpos ]
+            player.head.dpos[0] = player.head.dpos[0]%common.valx if player.head.dpos[0] > 0 else -1*(abs(player.head.dpos[0])%common.valx)
+            player.head.dpos[1] = player.head.dpos[1]%common.valy if player.head.dpos[1] > 0 else -1*(abs(player.head.dpos[1])%common.valy)
+            print(player.head.ison,player.head.dpos)
+            print()
 
         dx,dy = player.head.dpos
         world.mapblit(common.valx,common.valy,dx,dy)

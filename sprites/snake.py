@@ -40,19 +40,19 @@ class Square(pygame.sprite.Sprite):
 
         if self.dir == "right":
             dx += 1.54 * common.ratio * common.dt
-            dy += 0.872 * common.ratio * common.dt 
+            dy += 0.874 * common.ratio * common.dt 
             if self.ishead: self.ison[1] += dy/common.valy
         elif self.dir == "up":
             dx += 1.54 * common.ratio * common.dt
-            dy -= 0.872 * common.ratio * common.dt
+            dy -= 0.874 * common.ratio * common.dt
             if self.ishead: self.ison[0] += dy/common.valy
         elif self.dir == "left":
             dx -= 1.54 * common.ratio * common.dt
-            dy -= 0.872 * common.ratio * common.dt
+            dy -= 0.874 * common.ratio * common.dt
             if self.ishead: self.ison[1] += dy/common.valy
         elif self.dir == "down":
             dx -= 1.54 * common.ratio * common.dt
-            dy += 0.872 * common.ratio * common.dt
+            dy += 0.874 * common.ratio * common.dt
             if self.ishead: self.ison[0] += dy/common.valy
 
         if self.ishead:
@@ -72,11 +72,12 @@ class Square(pygame.sprite.Sprite):
 class Snake():
     def __init__(self):
         self.leng = 2
-        self.ismove = False
+        self.ismove = True
         self.mapchng = False
         self.head = Square(common.displaymid[0],common.displaymid[1],head=True)
         self.tail = Square(self.head.rect.centerx-common.valx,self.head.rect.centery+common.valy)
-        self.head.update() # so that the distance is maintained
+        print(self.head.x, self.head.y)
+#        self.head.update() # so that the distance is maintained
         self.tail.prev = self.head
         self.head.next = self.tail
         self.timer = pygame.time.get_ticks()
