@@ -21,6 +21,5 @@ while True:
     game.selector()
     window.blit(common.vwin,(0,0)) # final disp
     window.blit(fontt.render(fps,True,(0,0,0)),(0,0))
-    window.blit(fontt.render(str([round(x) for x in game.someval]),True,(0,0,0)),(0,40))
     pygame.display.update()
     clock.tick(60)

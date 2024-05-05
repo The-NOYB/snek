@@ -51,8 +51,6 @@ class Map():
 #        valy *= 2
 #        valy -= 1
 
-        dx += self.shift[0]*common.valx
-        dy += self.shift[1]*common.valy
         midx = common.displaymid[0]
         midy = common.displaymid[1]
 

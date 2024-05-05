@@ -14,22 +14,10 @@ class Game():
         self.state = "menu"
         self.wason = [0,0]
         world.con_alp()
-        player.head.ison = [x - .5 for x in world.spawn]
-        self.someval = player.head.ison
 
     def gmloop(self):
 
-
-        self.someval = player.head.ison
-        if player.ismove and abs(player.head.dpos[0]) > common.valx*5 and abs(player.head.dpos[1]) > common.valy*5:
-            print([(x,round(x)) for x in player.head.ison],player.head.dpos)
-            world.updworld( [round(x) for x in player.head.ison] )
-            player.head.dpos[0] = player.head.dpos[0]%common.valx if player.head.dpos[0] > 0 else -1*(abs(player.head.dpos[0])%common.valx)
-            player.head.dpos[1] = player.head.dpos[1]%common.valy if player.head.dpos[1] > 0 else -1*(abs(player.head.dpos[1])%common.valy)
-            print(player.head.ison,player.head.dpos)
-            print()
-
-        dx,dy = player.head.dpos
+        dx,dy = player.head.d2pos
         world.mapblit(common.valx,common.valy,dx,dy)
 
         for event in pygame.event.get(): # for loop for events
@@ -41,8 +29,6 @@ class Game():
                 if event.key == pygame.K_RETURN:
                     player.add()
                     snakebod.add(player.tail.prev)
-#                    player.head.d2pos = player.head.dpos.copy()
-#                    world.updworld( player.head.ison )
 
                 if event.key == pygame.K_SPACE and not player.ismove:
                     player.ismove = True
@@ -64,7 +50,7 @@ class Game():
 
         if player.ismove:
             snakebod.update(player.head.dmov[0],player.head.dmov[1])
-            print(f'{player.head.ison},{self.wason},{player.head.dpos}, {player.head.d2pos }')
+            print(f'{player.head.ison = },{self.wason = },{player.head.dpos = }, {player.head.d2pos = }')
 
 #        if (abs(player.head.d2pos[0]) > common.valx*5 or abs(player.head.d2pos[1]) > common.valy*5) and player.ismove:
 #        if (abs(player.head.dpos[0]) > 18 and abs(player.head.dpos[0])) < 19 or (abs(player.head.dpos[1]) > 10 and abs(player.head.dpos[1]) < 11):
