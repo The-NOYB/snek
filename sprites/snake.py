@@ -17,7 +17,10 @@ class Square(pygame.sprite.Sprite):
         if self.ishead:
             self.ison = [0,0]
             self.dmov = [0,0]
-            self.dpos = [0,0]
+            self.dpos = [0,0]   # postion from last block
+            self.d2pos = [0,0]  # postition of blocks for scrolling
+            self.chngx = False
+            self.chngy = False
 
     def closeto(self):
         v1 = pygame.math.Vector2(abs(self.prev.x - self.x), abs(self.prev.y - self.y))
@@ -31,6 +34,16 @@ class Square(pygame.sprite.Sprite):
             return True
 
         return False
+
+    def newison(self,dx,dy):
+        if self.dir == "up" and self.chngx:
+            self.ison[0] -= 1
+        elif self.dir == "left" and self.chngy:
+            self.ison[1] -= 1
+        elif self.dir == "right" and self.chngy:
+            self.ison[1] += 1
+        elif self.dir == "down" and self.chngx:
+            self.ison[0] += 1
 
     def update(self,hdx=0,hdy=0):
 
@@ -58,6 +71,33 @@ class Square(pygame.sprite.Sprite):
         if self.ishead:
             self.dpos[0] -= dx
             self.dpos[1] -= dy
+        elif self.dir == "up":
+            dx += 1.54 * common.ratio * common.dt
+            dy -= 0.874 * common.ratio * common.dt
+        elif self.dir == "left":
+            dx -= 1.54 * common.ratio * common.dt
+            dy -= 0.874 * common.ratio * common.dt
+        elif self.dir == "down":
+            dx -= 1.54 * common.ratio * common.dt
+            dy += 0.874 * common.ratio * common.dt
+
+        if self.ishead:
+            self.d2pos[0] -= dx
+            self.d2pos[1] -= dy
+            self.dpos[0] -= dx 
+            self.dpos[1] -= dy 
+
+            if abs(self.dpos[0]) > common.valx:
+                self.dpos[0] += common.valx if self.dir in ["right","up"] else -common.valx
+                self.chngx = True
+
+            if abs(self.dpos[1]) > common.valy:
+                self.dpos[1] += common.valy if self.dir in ["right","down"] else -common.valy
+                self.chngy = True
+
+            self.newison(dx,dy)
+            self.chngx,self.chngy = False,False
+
             self.dmov = [dx,dy]
         elif self.prev.dir != self.dir and self.closeto():
             self.x = self.prev.x + common.valx if self.prev.dir in ["down","left"] else self.prev.x - common.valx
