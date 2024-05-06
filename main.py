@@ -8,11 +8,14 @@ window = pygame.display.set_mode(common.displaysize)
 pygame.display.set_caption("The Snexplorer")
 clock = pygame.time.Clock()
 
+
 game = Game()
+
 
 while True:
     common.vwin.fill((123,69,30))
     common.time2 = time.time()
+
     common.dt = 60 * (common.time2 - common.time1)
     common.time1 = time.time()
     
