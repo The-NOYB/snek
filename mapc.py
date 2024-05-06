@@ -41,9 +41,10 @@ class Map():
         return warr
 
     def updworld(self,ison):
-        ison = [ ison[x] + self.start[x] for x in range(2)]
-        print(ison)
-        warr = self.getworld(ison)
+        newstart = [ ison[x] + self.start[x] for x in range(2)]
+        newison = [ ison[x] + self.middle[x] for x in range(2)]
+        print(newstart,newison)
+        warr = self.getworld(newstart)
         self.world = warr
                     
     def mapblit(self,valx,valy,dx=0,dy=0):   # work on this and inf
