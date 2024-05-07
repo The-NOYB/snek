@@ -62,8 +62,8 @@ class Game():
         
         snakebod.draw(common.vwin)
         pygame.draw.line(common.vwin,[0,0,0],common.displaymid,[common.displaymid[x] + player.head.d2pos[x] for x in range(2)])
-        pygame.draw.line(common.vwin,[0,0,0],(0,common.displaymid[1]),(960,common.displaymid[1]))
-        pygame.draw.line(common.vwin,[0,0,0],(common.displaymid[0],0),(common.displaymid[0],560))
+#        pygame.draw.line(common.vwin,[0,0,0],(0,common.displaymid[1]),(960,common.displaymid[1]))
+#        pygame.draw.line(common.vwin,[0,0,0],(common.displaymid[0],0),(common.displaymid[0],560))
 
     def menu(self):
         for event in pygame.event.get():

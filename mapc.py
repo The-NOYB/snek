@@ -57,10 +57,10 @@ class Map():
 
         for y,row in enumerate(self.world):
             for x, col in enumerate(row):
-                if col == 1:
+                if x==y and x==29:
+                    common.vwin.blit(pygame.transform.invert(self.block), (midx + (x-1)*valx - y*valx+ dx, midy - (self.leng - y)*valy + x * valy + dy))
+                elif col == 1:
                     common.vwin.blit(self.block, (midx + (x-1)*valx - y*valx+ dx, midy - (self.leng - y)*valy + x * valy + dy))
-                    if x==y and x==29:
-                        common.vwin.blit(pygame.transform.invert(self.block), (midx + (x-1)*valx - y*valx+ dx, midy - (self.leng - y)*valy + x * valy + dy))
                 elif col == 2:
                     common.vwin.blit(self.ice_block, (midx + (x-1)*valx - y*valx+ dx, midy - (self.leng - y)*valy + x*valy + dy))
                 elif col == 3:
